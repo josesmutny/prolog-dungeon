@@ -39,10 +39,10 @@ is_south(X, Y, X1, Y1):- X1 is X    , Y1 is Y - 1.
 is_east(X, Y, X1, Y1):-  X1 is X + 1, Y1 is Y.
 is_west(X, Y, X1, Y1):-  X1 is X - 1, Y1 is Y.
 
-north_door(X, Y):- is_north(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
-south_door(X, Y):- is_south(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
-east_door(X, Y):- is_east(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
-west_door(X, Y):- is_west(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
+north_door(X, Y, Key):- is_north(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(X1, Y1, X, Y, Key), !).
+south_door(X, Y, Key):- is_south(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(X1, Y1, X, Y, Key), !).
+east_door(X, Y, Key):- is_east(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(X1, Y1, X, Y, Key), !).
+west_door(X, Y, Key):- is_west(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(X1, Y1, X, Y, Key), !).
 
 move_player(X, Y, X1, Y1):-
     can_move(X1, Y1), move(X, Y, X1, Y1), write_room(), !;
