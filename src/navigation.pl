@@ -27,8 +27,6 @@ can_move(Xnext, Ynext):-
         is_dead(), false, !
     ),
     position(X, Y),
-    has_keys(Keys),
-    member(Key, Keys),
     (door(X, Y, Xnext, Ynext, Lock); door(Xnext, Ynext, X, Y, Lock)),
     opens(Key, Lock).
 
