@@ -8,14 +8,6 @@
             X   S   G
             |       |
             I - X g X
-
-
-
-
-
-
-
-
 */
 
 :- dynamic door/5.
