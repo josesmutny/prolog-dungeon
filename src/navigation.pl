@@ -45,9 +45,9 @@ east_door(X, Y):- is_east(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1,
 west_door(X, Y):- is_west(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
 
 move_player(X, Y, X1, Y1):-
-    can_move(X1, Y1), move(X, Y, X1, Y1), !;
-    not(door(X, Y, X1, Y1, _)), custom_writes:is_long_delay(Delay), write_delayed("There is no door.\n", Delay), !;
-    door(X, Y, X1, Y1, Lock), opens(Key, Lock), has_keys(Keys), not(member(Key, Keys)), write("You do not have the right key."), nl, !.
+    can_move(X1, Y1), move(X, Y, X1, Y1), write_room(), !;
+    not(door(X, Y, X1, Y1, _)), write_no_door(), false;
+    door(X, Y, X1, Y1, Lock), opens(Key, Lock), has_keys(Keys), not(member(Key, Keys)), write_invalid_key(), !.
 
 north():- position(X, Y), is_north(X, Y, X1, Y1), move_player(X, Y, X1, Y1).
 south():- position(X, Y), is_south(X, Y, X1, Y1), move_player(X, Y, X1, Y1).
