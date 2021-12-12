@@ -5,7 +5,14 @@
     has_n_of/3,
     has_n_lives/1,
     has_weapons/1,
-    is_dead/0
+    is_dead/0,
+    remove_key/1,
+    set_keys/1,
+    set_weapons/1,
+    set_teleport/1,
+    set_room_contents/3,
+    set_room_enemy/3,
+    unlock_door/5
 ]).
 :- use_module(attack).
 
@@ -15,7 +22,7 @@
 position(0, 0).
 
 :- dynamic has_keys/1.
-has_keys([1, 1, 1, 2]).
+has_keys([]).
 
 :- dynamic has_teleport/2.
 has_teleport(0, 1).
@@ -39,10 +46,59 @@ clear_variables():-
     retractall(has_n_lives(_)),
     retractall(has_enemy(_, _, _)).
 
+set_keys(List):-
+    retractall(has_keys(_)),
+    assert(has_keys(List)).
+
+remove_first([], _, []):- !.
+remove_first([Item], Item, []):- !.
+remove_first([Item|Tail], Item, Tail):- !.
+remove_first([Head|Tail], Item, [Head|ListWithout]):-
+    Head \= Item,
+    remove_first(Tail, Item, ListWithout), !.
+
+clear_keys():-
+    retractall(has_keys(_)).
+
+remove_key(Key):-
+    has_keys(Keys),
+    member(Key, Keys),
+    remove_first(Keys, Key, NewKeys),
+    clear_keys(),
+    set_keys(NewKeys), !.
+
+
+unlock_door(X, Y, Xnext, Ynext, _):-
+    (
+        door(X, Y, Xnext, Ynext, _), retractall(door(X, Y, Xnext, Ynext, _)), !;
+        door(Xnext, Ynext, X, Y, _), retractall(door(X, Y, Xnext, Ynext, _)), !
+    ),
+    lock_is_open(Lock), assert(door(X, Y, Xnext, Ynext, Lock)).
+
 set_enemies([]).
 set_enemies([[X, Y, Enemy]|Tail]):-
     assert(has_enemy(X, Y, Enemy)),
     set_enemies(Tail).
+
+set_teleport([X, Y]):-
+    retractall(has_teleport(_, _)),
+    assert(has_teleport(X, Y)).
+
+set_weapons(Weapons):-
+    retractall(has_weapons(_)),
+    assert(has_weapons(Weapons)).
+
+set_room_contents(X, Y, Contents):-
+    room(X, Y, _, Enemy, Description),
+    NewEnemy is Enemy, NewDescription = Description,
+    retractall(room(X, Y, _, _, _)),
+    assert(room(X, Y, Contents, NewEnemy, NewDescription)).
+
+set_room_enemy(X, Y, Enemy):-
+    room(X, Y, Contents, _, Description),
+    NewContents is Contents, NewDescription = Description,
+    retractall(room(X, Y, _, _, _)),
+    assert(room(X, Y, NewContents, Enemy, NewDescription)).
 
 set_variables(PlayerX, PlayerY, Keys, Weapons, HasTele, TeleX, TeleY, LifeCount, Enemies):-
     assert(position(PlayerX, PlayerY)),
