@@ -34,8 +34,8 @@ can_move(Xnext, Ynext):-
 
 is_north(X, Y, X1, Y1):- X1 is X    , Y1 is Y + 1.
 is_south(X, Y, X1, Y1):- X1 is X    , Y1 is Y - 1.
-is_east(X, Y, X1, Y1):-  X1 is X - 1, Y1 is Y.
-is_west(X, Y, X1, Y1):-  X1 is X + 1, Y1 is Y.
+is_east(X, Y, X1, Y1):-  X1 is X + 1, Y1 is Y.
+is_west(X, Y, X1, Y1):-  X1 is X - 1, Y1 is Y.
 
 north_door(X, Y):- is_north(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
 south_door(X, Y):- is_south(X, Y, X1, Y1), (door(X, Y, X1, Y1, _), !; door(X1, Y1, X, Y, _), !).
