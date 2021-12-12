@@ -16,10 +16,8 @@
 % Move functions ==================================================================================
 
 move(X, Y, X1, Y1):-
-    write_position(X1, Y1), nl,
     retract(position(X, Y)),
-    assert(position(X1, Y1)),
-    write_status().
+    assert(position(X1, Y1)).
 
 can_move(Xnext, Ynext):-
     (
