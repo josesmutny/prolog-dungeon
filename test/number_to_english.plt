@@ -1,5 +1,5 @@
 :- begin_tests(number_to_english).
-:- use_module("../src/number_to_english").
+:- use_module("../src/write/number_to_english").
 
 test("Digits without string"):-
     number_to_english(1, String),

@@ -1,6 +1,3 @@
-/*
- * Print numbers up to 99 (positive only), !.
- */
 :- module(number_to_english, [number_to_english/2, number_to_english/3]).
 :- use_module(custom_writes).
 
