@@ -12,7 +12,8 @@
     set_teleport/1,
     set_room_contents/3,
     set_room_enemy/3,
-    unlock_door/5
+    unlock_door/5,
+    clear_teleport/0
 ]).
 :- use_module(attack).
 :- use_module(doors).
@@ -28,7 +29,7 @@ has_keys([]).
 has_teleport(0, 1).
 
 :- dynamic has_weapons/1.
-has_weapons([Sword]):- is_sword(Sword).
+has_weapons([]).
 
 :- dynamic has_n_lives/1.
 has_n_lives(3).
@@ -43,7 +44,8 @@ clear_variables():-
     retractall(has_keys(_)),
     retractall(has_teleport(_, _)),
     retractall(has_weapons(_)),
-    retractall(has_n_lives(_)),
+    retractall(has_n_lives(_))
+,
     retractall(has_enemy(_, _, _)).
 
 set_keys(List):-
@@ -105,6 +107,9 @@ set_variables(PlayerX, PlayerY, Keys, Weapons, HasTele, TeleX, TeleY, LifeCount,
     (HasTele, assert(has_teleport(TeleX, TeleY)), !; not(HasTele)),
     assert(has_n_lives(LifeCount)),
     set_enemies(Enemies).
+
+clear_teleport():-
+    retractall(has_teleport(_, _)).
 
 /* List utilities ========================================================================*/
 has_n_of(_, [], 0).

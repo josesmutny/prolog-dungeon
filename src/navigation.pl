@@ -6,7 +6,8 @@
     north_door/3,
     south_door/3,
     east_door/3,
-    west_door/3
+    west_door/3,
+    move/4
 ]).
 :- use_module(common).
 :- use_module(write/custom_writes).

@@ -7,7 +7,9 @@
     write_picked_teleport/1,
     write_picked_weapon/1,
     write_no_items_to_pick/0,
-    write_full_inventory/0
+    write_full_inventory/0,
+    write_teleported/2,
+    write_no_teleport/0
 ]).
 
 :- use_module("../common").
@@ -207,3 +209,13 @@ write_no_items_to_pick():-
 write_full_inventory():-
     is_long_delay(Delay),
     write_delayed("Your inventory is full, you cannot pick anything new.", Delay).
+
+
+% ===============================================================================
+
+write_teleported(X, Y):-
+    format(string(String), "You are engulfed by flames, and you appear in the room at (~d, ~d).\n", [X, Y]),
+    write_delayed(String).
+
+write_no_teleport():-
+    write_delayed("You have no teleport device.\n").
