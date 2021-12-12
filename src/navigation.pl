@@ -24,7 +24,7 @@ move(X, Y, X1, Y1):-
 can_move(Xnext, Ynext):-
     (
         not(is_dead()), !;
-        is_dead(), write("Dead people cannot move :("), false, !
+        is_dead(), false, !
     ),
     position(X, Y),
     has_keys(Keys),
