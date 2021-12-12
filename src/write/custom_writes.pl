@@ -77,7 +77,7 @@ is_weapon_status(String):-
     length(UniqueWeapons, WeaponCount),
     (
         WeaponCount \= 0, is_appended_status(is_single_weapon_status, UniqueWeapons, "You are armed with ", String), !;
-        WeaponCount = 0, format(string(String), "You are unarmed."), !
+        WeaponCount = 0, String = "You are unarmed.", !
     ).
 
 % === Teleport status ============================================================
