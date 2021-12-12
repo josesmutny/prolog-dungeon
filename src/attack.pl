@@ -5,12 +5,16 @@
     is_ghost/1,
     is_orc/1,
     remove_life/0,
-    no_enemy/1
+    no_enemy/1,
+    is_weapon_description/2
 ]).
 :- use_module(common).
 
-is_sword(Item):- Item is 1.
-is_axe(Item):- Item is 2.
+is_sword(Item):- Item is -1.
+is_axe(Item):- Item is -2.
+
+is_weapon_description(Item, "sword"):- is_sword(Item).
+is_weapon_description(Item, "axe"):- is_axe(Item).
 
 no_enemy(Entity):- Entity is 0.
 is_ogre(Entity):- Entity is 1.
