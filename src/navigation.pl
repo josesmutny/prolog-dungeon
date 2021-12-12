@@ -28,10 +28,7 @@ can_move(Xnext, Ynext):-
     (door(X, Y, Xnext, Ynext, Lock); door(Xnext, Ynext, X, Y, Lock)),
     (
         lock_is_open(Lock);
-        opens(Key, Lock), remove_key(Key), (
-            unlock_door(X, Y, Xnext, Ynext, Lock);
-            unlock_door(Xnext, Ynext, X, Y, Lock)
-        )
+        opens(Key, Lock), remove_key(Key), unlock_door(X, Y, Xnext, Ynext, Lock)
     ).
 
 is_north(X, Y, X1, Y1):- X1 is X    , Y1 is Y + 1.

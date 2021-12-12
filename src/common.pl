@@ -15,7 +15,7 @@
     unlock_door/5
 ]).
 :- use_module(attack).
-
+:- use_module(doors).
 
 /* Memory simulation =====================================================================*/
 :- dynamic position/2.
@@ -68,12 +68,10 @@ remove_key(Key):-
     set_keys(NewKeys), !.
 
 
-unlock_door(X, Y, Xnext, Ynext, _):-
-    (
-        door(X, Y, Xnext, Ynext, _), retractall(door(X, Y, Xnext, Ynext, _)), !;
-        door(Xnext, Ynext, X, Y, _), retractall(door(X, Y, Xnext, Ynext, _)), !
-    ),
-    lock_is_open(Lock), assert(door(X, Y, Xnext, Ynext, Lock)).
+unlock_door(X, Y, Xnext, Ynext, Lock):-
+    retractall(door(X, Y, Xnext, Ynext, Lock)),
+    retractall(door(Xnext, Ynext, X, Y, Lock)),
+    lock_is_open(Unlocked), asserta(door(X, Y, Xnext, Ynext, Unlocked)).
 
 set_enemies([]).
 set_enemies([[X, Y, Enemy]|Tail]):-
