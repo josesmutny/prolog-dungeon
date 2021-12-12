@@ -3,13 +3,13 @@
     south/0,
     east/0,
     west/0,
-    north_door/2,
-    south_door/2,
-    east_door/2,
-    west_door/2
+    north_door/3,
+    south_door/3,
+    east_door/3,
+    west_door/3
 ]).
 :- use_module(common).
-:- use_module(custom_writes).
+:- use_module(write/custom_writes).
 :- use_module(security).
 :- use_module(doors).
 
