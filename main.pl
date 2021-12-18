@@ -5,6 +5,7 @@
 :- use_module(src/write/helpers).
 :- use_module(src/security).
 :- use_module(src/items).
+:- use_module(src/teleport).
 
 :-
     write_delayed("Hello traveller.\n", 0.1, 1), nl,
