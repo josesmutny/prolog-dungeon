@@ -17,5 +17,5 @@ teleport():-
     not(is_dead),
     (
         has_teleport(X, Y), position(CurrX, CurrY), move(CurrX, CurrY, X, Y), clear_teleport(), write_teleported(X, Y), !;
-        not(has_teleport(_, _)), write_no_teleport, !
+        not(has_teleport(_, _)), write_no_teleport, !, false
     ).
