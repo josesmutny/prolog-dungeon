@@ -140,10 +140,7 @@ has_n_items_of_type(Count, Item):-
     position(X, Y),
     room(X, Y, Items, _, _),
     (
-        is_teleport(Item), (
-            has_teleport(_, _), Count is 1, !;
-            not(has_teleport(_, _)), Count is 0, !
-        ), !;
+        is_teleport(Item), Count is 1, !;
         is_key(Item), has_n_keys_of_type(Count, Items, Item), !;
         is_weapon(Item), has_n_weapons_of_type(Count, Items, Item), !
     ).
