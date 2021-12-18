@@ -14,6 +14,7 @@ is_teleport_description([X, Y], String):-
     format(string(String), "teleport to (~d, ~d)", [X, Y]).
 
 teleport():-
+    not(is_dead),
     (
         has_teleport(X, Y), position(CurrX, CurrY), move(CurrX, CurrY, X, Y), clear_teleport(), write_teleported(X, Y), !;
         not(has_teleport(_, _)), write_no_teleport, !
