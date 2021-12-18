@@ -78,7 +78,7 @@ unlock_door(X, Y, Xnext, Ynext, Lock):-
 
 set_enemies([]).
 set_enemies([[X, Y, Enemy]|Tail]):-
-    assert(has_enemy(X, Y, Enemy)),
+    set_room_enemy(X, Y, Enemy),
     set_enemies(Tail).
 
 set_teleport([X, Y]):-
