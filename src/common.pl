@@ -46,8 +46,7 @@ clear_variables():-
     retractall(has_keys(_)),
     retractall(has_teleport(_, _)),
     retractall(has_weapons(_)),
-    retractall(has_n_lives(_))
-,
+    retractall(has_n_lives(_)),
     retractall(has_enemy(_, _, _)).
 
 set_keys(List):-
