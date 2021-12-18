@@ -9,7 +9,12 @@
     write_no_items_to_pick/0,
     write_full_inventory/0,
     write_teleported/2,
-    write_no_teleport/0
+    write_no_teleport/0,
+    write_defeat/1,
+    write_kill/2,
+    write_lives/0,
+    write_death/0,
+    write_defeated/1
 ]).
 
 :- use_module("../common").
@@ -219,3 +224,40 @@ write_teleported(X, Y):-
 
 write_no_teleport():-
     write_delayed("You have no teleport device.\n").
+
+
+% ===============================================================================
+
+is_enemy_introduction(Entity, InteractionMessage):-
+    is_enemy_description(Entity, Description),
+    number_to_english(1, EnglishOne, Description),
+    format(string(InteractionMessage), "You are met with ~w ~w.", [EnglishOne, Description]).
+
+write_kill(Entity, Weapon):-
+    is_kill_message(Entity, Weapon, Message),
+    is_enemy_introduction(Entity, Introduction),
+    format(string(String), "~w ~w\n", [Introduction, Message]),
+    is_long_delay(Delay),
+    write_delayed(String, Delay).
+
+write_defeat(Entity):-
+    is_defeat_message(Entity, Message),
+    is_enemy_introduction(Entity, Introduction),
+    format(string(String), "~w ~w\n", [Introduction, Message]),
+    is_long_delay(Delay),
+    write_delayed(String, Delay).
+
+write_defeated(Entity):-
+    is_death_message(Entity, Message),
+    format(string(String), "~w\n", Message),
+    is_long_delay(Delay),
+    write_delayed(String, Delay).
+
+write_lives():-
+    is_life_status(Status),
+    is_long_delay(Delay),
+    write_delayed(Status, Delay), nl.
+
+write_death():-
+    is_long_delay(Delay),
+    write_delayed("You died...\n\nUse the restart or exit command.", Delay).
