@@ -13,7 +13,9 @@
     set_room_contents/3,
     set_room_enemy/3,
     unlock_door/5,
-    clear_teleport/0
+    clear_teleport/0,
+    exit/1,
+    restart/1
 ]).
 :- use_module(attack).
 :- use_module(doors).
@@ -123,3 +125,16 @@ has_n_of(Elem, [Head | Tail], N):-
 		Elem is Head, N is N1+ 1, !;
 		not( Elem is Head), N is N1
 	), !.
+
+% =========================================================================================
+
+exit():-
+    halt.
+
+restart():-
+    clear_variables,
+    set_variables(0, 0, [], [], false, 0, 0, 3,
+        [[X1, Y1, Enemy1],
+        [X2, Y2, Enemy2],
+        [X3, Y3, Enemy3]]
+    ).
