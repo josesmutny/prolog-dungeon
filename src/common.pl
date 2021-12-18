@@ -97,7 +97,7 @@ set_room_contents(X, Y, Contents):-
 
 set_room_enemy(X, Y, Enemy):-
     room(X, Y, Contents, _, Description),
-    NewContents is Contents, NewDescription = Description,
+    NewContents = Contents, NewDescription = Description,
     retractall(room(X, Y, _, _, _)),
     assert(room(X, Y, NewContents, Enemy, NewDescription)).
 
