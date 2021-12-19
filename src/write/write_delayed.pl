@@ -11,11 +11,11 @@
 ]).
 
 is_no_delay(0).
-is_very_short_delay(0).
-is_short_delay(0).
-is_normal_delay(0).
-is_long_delay(0).
-is_very_long_delay(0).
+is_very_short_delay(0.002).
+is_short_delay(0.01).
+is_normal_delay(0.05).
+is_long_delay(0.25).
+is_very_long_delay(1).
 
 :- discontiguous write_delayed/1.
 write_delayed_list(['\n'], Delay, FinalDelay):- sleep(Delay), sleep(FinalDelay), write('\n'), !.
