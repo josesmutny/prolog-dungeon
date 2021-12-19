@@ -48,7 +48,7 @@ east_door(X, Y, Key):- is_east(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(
 west_door(X, Y, Key):- is_west(X, Y, X1, Y1), (door(X, Y, X1, Y1, Key), !; door(X1, Y1, X, Y, Key), !).
 
 move_player(X, Y, X1, Y1):-
-    can_move(X1, Y1), move(X, Y, X1, Y1), attack(), write_room(), !;
+    can_move(X1, Y1), move(X, Y, X1, Y1), write_room(), attack(), !;
     is_dead, write_death, !, false;
     not(door(X, Y, X1, Y1, _)), write_no_door(), false, !;
     door(X, Y, X1, Y1, Lock), opens(Key, Lock), has_keys(Keys), not(member(Key, Keys)), write_invalid_key(), false, !.
