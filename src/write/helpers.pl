@@ -13,7 +13,7 @@
 
 
 has_n_keys_of_type(N, Keys, Type):-
-    Key is Type,
+    Key = Type,
     (
 		member(Key, Keys), has_n_of(Key, Keys, N), !;
 		not(member(Key, Keys)), N is 0
@@ -21,7 +21,7 @@ has_n_keys_of_type(N, Keys, Type):-
 has_n_keys_of_type(N, Type):- has_keys(Keys), has_n_keys_of_type(N, Keys, Type).
 
 has_n_weapons_of_type(N, Weapons, Type):-
-    Weapon is Type,
+    Weapon = Type,
     (
         member(Weapon, Weapons), has_n_of(Weapon, Weapons, N), !;
         not(member(Weapon, Weapons)), N is 0
