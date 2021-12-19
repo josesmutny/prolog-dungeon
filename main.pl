@@ -10,6 +10,7 @@
 :- use_module(src/common).
 
 :-
+    set_delayed,
     write_delayed("Hello traveller.\n", 0.1), nl,
 /*    write_delayed("An adventure awaits.\n", 1),
     write_delayed("You are trapped in a dungeon, from whence only few have come alive.\n"),
