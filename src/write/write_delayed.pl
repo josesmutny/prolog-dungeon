@@ -2,20 +2,26 @@
     write_delayed/1,
     write_delayed/2,
     write_delayed/3,
-    is_no_delay/1,
-    is_very_short_delay/1,
     is_short_delay/1,
-    is_normal_delay/1,
     is_long_delay/1,
-    is_very_long_delay/1
+    set_instant/0,
+    set_delayed/0
 ]).
 
-is_no_delay(0).
-is_very_short_delay(0.002).
-is_short_delay(0.01).
-is_normal_delay(0.05).
-is_long_delay(0.25).
-is_very_long_delay(1).
+:- dynamic is_short_delay/1.
+:- dynamic is_long_delay/1.
+
+set_instant():-
+    retractall(is_short_delay(_)),
+    retractall(is_long_delay(_)),
+    assert(is_short_delay(0)),
+    assert(is_long_delay(0)).
+
+set_delayed():-
+    retractall(is_short_delay(_)),
+    retractall(is_long_delay(_)),
+    assert(is_short_delay(0.01)),
+    assert(is_long_delay(0.33)).
 
 :- discontiguous write_delayed/1.
 write_delayed_list(['\n'], Delay, FinalDelay):- sleep(Delay), sleep(FinalDelay), write('\n'), !.
@@ -36,7 +42,7 @@ write_delayed(String, Delay, DelayLast):-
 
 write_delayed(String):-
     is_short_delay(Delay),
-    is_no_delay(FinalDelay),
+    FinalDelay = 0,
     write_delayed(String, Delay, FinalDelay).
 
 write_delayed(String, DelayLast):-
