@@ -34,6 +34,7 @@ has_n_items(N):-
     N is KeyCount + TeleportCount + WeaponCount.
 
 pick():-
+    (not(is_dead),
     has_n_items(ItemCount),
     position(X, Y),
     (
@@ -47,4 +48,5 @@ pick():-
 
         room(X, Y, [], _, _), write_no_items_to_pick(), false;
         ItemCount is 5, write_full_inventory(), false
-    ), !.
+    ), !);
+    write_death, false, !.
