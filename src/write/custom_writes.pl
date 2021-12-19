@@ -29,7 +29,8 @@
 /* =========================================================================== */
 is_room_description(String):-
     position(X, Y),
-    room(X, Y, _, _, String), !.
+    room(X, Y, _, _, Description),
+    format(string(String), "~w\n", Description), !.
 /* === General status ======================================================== */
 
 is_item_status(Count, Description, String):-
