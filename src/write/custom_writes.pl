@@ -158,7 +158,7 @@ is_room_items_description(String):-
     has_unique_items(Items, UniqueItems), % otherwhise every key writes that there are N of itself (ther ar thre, there are three, there are three...)
     (
         UniqueItems = [], format(string(String), "There is nothing in the room.", []), !;
-        is_appended_status(is_room_item_status, UniqueItems, "On the floor you find ", String), !
+        is_appended_status(is_room_item_status, UniqueItems, "You find ", String), !
     ).
 
 
