@@ -7,7 +7,11 @@
     south_door/3,
     east_door/3,
     west_door/3,
-    move/4
+    move/4,
+    is_north/4,
+    is_south/4,
+    is_east/4,
+    is_west/4
 ]).
 :- use_module(common).
 :- use_module(write/custom_writes).
